@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="day"></div>
+</body>
+<script>
+
+function countdown() {
+  const newYears = new Date('2025-01-28T24:00:00'); // 设置目标时间：2023年春节
+  const current = new Date(); // 获取当前时间
+  const diff = newYears - current; // 计算差值
+ 
+  // 如果当前时间超过了目标时间，则显示已经过去的时间
+  if (diff < 0) {
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
+  }
+ 
+  // 计算时间差的单位
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+ 
+  return { days, hours, minutes, seconds };
+}
+ 
+function updateCountdown() {
+  const { days, hours, minutes, seconds } = countdown();
+//   console.log(`倒计时：${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`);
+    document.getElementById('day').innerHTML = `距离春节剩：${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+  // 每秒更新一次倒计时
+  setTimeout(updateCountdown, 1000);
+}
+ 
+// 初始更新倒计时
+updateCountdown();
+
+</script>
+</html>
